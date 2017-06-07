@@ -57,19 +57,19 @@ object Main {
     charArray.deep.mkString("")
   }
 
+  def sortStrings(words : Array[String]): Array[String] ={
+    for(i <- 0 to words.length-1) {
+      words(i) = sortCharactersAlphabetically(words(i))
+    }
+    words
+  }
+
 
   def main(args:Array[String]) : Unit ={
 
     //new java.io.File(dirName).listFiles.filter(_.getName.endsWith(".txt"))
     var words = readFromFile("C:\\Users\\Administrator\\IdeaProjects\\ScalaQA-AdvancedExercises1\\src\\main\\scala\\test.txt")
 
-    //test swapping words around
-    for(i <- 0 to words.length-1){
-      print("Word Before Sorting: " + words(i))
-      words(i) = sortCharactersAlphabetically(words(i))
-      print("\nWord After Sorting: " + words(i) + "\n")
-    }
-
-
+    words = sortStrings(words)
   }
 }
