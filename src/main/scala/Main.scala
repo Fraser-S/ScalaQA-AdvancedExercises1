@@ -5,6 +5,7 @@
 import java.io.FileNotFoundException
 import java.util.HashMap
 
+import scala.collection.mutable.ListBuffer
 import scala.io.Source
 
 object Main {
@@ -66,12 +67,21 @@ object Main {
     sortedWords
   }
 
-  def createHashMap(keys : Array[String], values: Array[String]): HashMap[String,String] ={
+  def createHashMap(keys : Array[String], values: Array[String]): HashMap[String,ListBuffer[String]] ={
     //set up the hash map
-    var wordHashMap : HashMap[String, String] = new HashMap
+    var wordHashMap : HashMap[String, ListBuffer[String]] = new HashMap
     //loop for each word
     for(i <- 0 to keys.length-1) {
-      wordHashMap.put(keys(i),values(i))
+      //if key does'nt exist create it
+      if(!wordHashMap.containsKey(keys(i))){
+        //add the key to the map
+        var list:ListBuffer[String] = ListBuffer(values(i))
+        wordHashMap.put(keys(i),list)//add it to the list
+      } else {
+        //get the list
+        var list : ListBuffer[String] = wordHashMap.get(keys(i))
+        list += values(i)//this updates the list
+      }
     }
     wordHashMap
   }
