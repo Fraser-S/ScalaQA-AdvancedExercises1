@@ -3,6 +3,7 @@
   */
 
 import java.io.FileNotFoundException
+import java.util.HashMap
 
 import scala.io.Source
 
@@ -58,11 +59,23 @@ object Main {
   }
 
   def sortStrings(words : Array[String]): Array[String] ={
+    var sortedWords = new Array[String](words.length)
     for(i <- 0 to words.length-1) {
-      words(i) = sortCharactersAlphabetically(words(i))
+      sortedWords(i) = sortCharactersAlphabetically(words(i))
     }
-    words
+    sortedWords
   }
+
+  def createHashMap(keys : Array[String], values: Array[String]): HashMap[String,String] ={
+    //set up the hash map
+    var wordHashMap : HashMap[String, String] = new HashMap
+    //loop for each word
+    for(i <- 0 to keys.length-1) {
+      wordHashMap.put(keys(i),values(i))
+    }
+    wordHashMap
+  }
+
 
 
   def main(args:Array[String]) : Unit ={
@@ -70,6 +83,14 @@ object Main {
     //new java.io.File(dirName).listFiles.filter(_.getName.endsWith(".txt"))
     var words = readFromFile("C:\\Users\\Administrator\\IdeaProjects\\ScalaQA-AdvancedExercises1\\src\\main\\scala\\test.txt")
 
-    words = sortStrings(words)
+    println(words.deep.mkString(", "))
+    var sortedWords = sortStrings(words)
+
+    println(words.deep.mkString(", "))
+
+    var hashmap = createHashMap(sortedWords, words)
+    //display keys
+    print(hashmap.toString)
+    //display values
   }
 }
